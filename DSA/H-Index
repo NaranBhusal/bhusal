@@ -1,0 +1,29 @@
+lass Solution {
+public:
+    int hIndex(vector<int>& citations) {
+    
+    // Step 1: Sort the citations in non-decreasing order
+    std::sort(citations.begin(), citations.end());
+    
+    int n = citations.size();
+    
+    // Step 2: Find the maximum H-Index
+    for (int i = 0; i < n; ++i) {
+        // Number of papers with at least citations[i] citations
+        int h = n - i;
+        
+        // If citations[i] is greater than or equal to h, return h
+        if (citations[i] >= h) {
+            return h;
+        }
+    }
+    
+    // If no valid H-Index is found, return 0
+    return 0;
+}
+
+
+
+        
+    
+};
