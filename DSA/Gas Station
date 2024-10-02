@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int canCompleteCircuit(std::vector<int>& gas, std::vector<int>& cost) {
+        int total_tank = 0;    // Total gas - cost over all stations
+        int current_tank = 0;  // Gas left in the tank for current trip
+        int start_station = 0; // Starting station
+
+        for (int i = 0; i < gas.size(); ++i) {
+            total_tank += gas[i] - cost[i];
+            current_tank += gas[i] - cost[i];
+
+            // If at any point current tank goes negative, start from the next station
+            if (current_tank < 0) {
+                start_station = i + 1;
+                current_tank = 0;
+            }
+        }
+
+        // If total_tank is negative, no solution is possible
+        return (total_tank >= 0) ? start_station : -1;
+    }
+};
