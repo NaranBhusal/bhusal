@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        // Create a map for Roman numeral values
+        unordered_map<char, int> roman_map = {
+            {'I', 1},
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100},
+            {'D', 500},
+            {'M', 1000}
+        };
+        
+        int total = 0;  // Initialize total to 0
+        int prev_value = 0;  // To store the value of the previous numeral
+        
+        // Loop through the string from left to right
+        for (char c : s) {
+            int current_value = roman_map[c];  // Get the value of the current Roman numeral
+            
+            // If the previous value is less than the current value, subtract twice the previous value
+            if (prev_value < current_value) {
+                total += current_value - 2 * prev_value;
+            } else {
+                total += current_value;
+            }
+            
+            // Update the previous value to the current value for the next iteration
+            prev_value = current_value;
+        }
+        
+        return total;
+    }
+};
+
+    
