@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        if (s.size() != t.size()) return false; // If lengths don't match, they can't be isomorphic
+        
+        // Two maps to keep track of the character mappings
+        unordered_map<char, char> s_to_t;
+        unordered_map<char, char> t_to_s;
+        
+        for (int i = 0; i < s.size(); i++) {
+            char c1 = s[i];
+            char c2 = t[i];
+            
+            // Check if there's already a mapping for s -> t
+            if (s_to_t.count(c1)) {
+                if (s_to_t[c1] != c2) {
+                    return false; // Mismatch in mapping
+                }
+            } else {
+                s_to_t[c1] = c2; // Create the mapping
+            }
+            
+            // Check if there's already a mapping for t -> s
+            if (t_to_s.count(c2)) {
+                if (t_to_s[c2] != c1) {
+                    return false; // Mismatch in mapping
+                }
+            } else {
+                t_to_s[c2] = c1; // Create the mapping
+            }
+        }
+        
+        return true; // No conflicts, so they are isomorphic
+    }
+};
