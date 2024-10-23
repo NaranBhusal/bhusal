@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        vector<string> words;
+        stringstream ss(s);
+        string word;
+        while (ss >> word) {
+            words.push_back(word);
+        }
+        if(words.size() != pattern.size()) return false;
+        map<char,string> mp;
+        map<string,char> mp2;
+
+        for(int i = 0; i<pattern.size(); i++) {
+            if(mp.count(pattern[i]) != 0 || mp2.count(words[i]) != 0){
+                if(mp[pattern[i]] != words[i] || mp2[words[i]] != pattern[i]) return false;
+            }
+            else {
+                mp[pattern[i]] = words[i];
+                mp2[words[i]] = pattern[i];
+            }
+        }
+        return true;
+    }
+};
