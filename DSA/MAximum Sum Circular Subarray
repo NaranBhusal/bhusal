@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int total_sum = 0;
+    int max_sum = nums[0], min_sum = nums[0];
+    int current_max = 0, current_min = 0;
+
+    for (int i = 0; i < nums.size(); ++i) {
+        total_sum += nums[i];
+
+        // Kadane's Algorithm for maximum subarray sum
+        current_max = max(nums[i], current_max + nums[i]);
+        max_sum = max(max_sum, current_max);
+
+        // Kadane's Algorithm for minimum subarray sum
+        current_min = min(nums[i], current_min + nums[i]);
+        min_sum = min(min_sum, current_min);
+    }
+
+    // Special case: if all elements are negative, return max_sum
+    if (max_sum < 0) return max_sum;
+
+    // Calculate the maximum of the non-circular and circular cases
+    return max(max_sum, total_sum - min_sum);
+    }
+};
