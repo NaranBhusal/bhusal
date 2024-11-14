@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> hash(256, -1);  // Initialize hash array for ASCII characters with -1
+        int n = s.size();
+        int maxLength = 0;  // Store the maximum length of substring without repeating characters
+        int l = 0;  // Left pointer for the sliding window
+
+        for (int r = 0; r < n; ++r) {
+            if (hash[s[r]] != -1) {
+                // Move left pointer to the right of the last occurrence of s[r]
+                l = max(hash[s[r]] + 1, l);
+            }
+            int len = r - l + 1;
+            maxLength = max(len, maxLength);
+
+            // Update the last occurrence of s[r]
+            hash[s[r]] = r;
+        }
+        return maxLength;
+    }
+};  
