@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+                int n = nums.size();
+        int minlength = n + 1; // Set to n+1 initially as a sentinel value
+        int sum = 0, start = 0;
+
+        for (int end = 0; end < n; ++end) {
+            sum += nums[end];
+
+            while (sum >= target) {
+                minlength = min(minlength, end - start + 1);
+                sum -= nums[start++];
+            }
+        }
+
+        return minlength == n + 1 ? 0 : minlength;
+    }
+};
