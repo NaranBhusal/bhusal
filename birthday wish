@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Wish for Mamta</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff80b3, #cc99ff);
+            overflow-x: hidden;
+        }
+        .container, .second-display, .no-display {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 90vw;
+            width: 600px;
+            transition: opacity 0.5s;
+        }
+        .second-display, .no-display {
+            display: none;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+        h1 {
+            color: #e60050;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease-in;
+            position: relative;
+            transition: color 0.3s;
+        }
+        h1:hover {
+            color: #ff1493;
+            text-decoration: underline;
+        }
+        p {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .cake-container {
+            margin: 20px 0;
+            position: relative;
+        }
+        .cake, .celebration-img {
+            width: 200px;
+            max-width: 50vw;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            position: relative;
+        }
+        .cake:hover, .cake:active, .celebration-img:hover, .celebration-img:active {
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+        }
+        .cake:hover:after, .celebration-img:hover:after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            animation: sparkle 0.5s infinite;
+        }
+        .celebration-img {
+            display: none;
+            animation: scaleIn 0.5s ease-in;
+        }
+        .question {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: #e60050;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff69b4, #ff4040);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+            position: relative;
+        }
+        button:hover, button:active {
+            background: linear-gradient(45deg, #ff1493, #e60050);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+            animation: pulse 0.5s infinite alternate;
+        }
+        button:hover:after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            animation: sparkle 0.5s infinite;
+        }
+        .music-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            background: linear-gradient(45deg, #ff69b4, #ff4040);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .music-toggle:hover, .music-toggle:active {
+            background: linear-gradient(45deg, #ff1493, #e60050);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+        }
+        .second-cake-container, .no-cake-container {
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        .second-cake-container:hover, .second-cake-container:active, .no-cake-container:hover, .no-cake-container:active {
+            transform: translateY(-5px);
+        }
+        .second-cake, .no-cake {
+            width: 250px;
+            max-width: 60vw;
+            border-radius: 10px;
+        }
+        .candle, .heart {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            max-width: 10vw;
+        }
+        .candle {
+            animation: flicker 0.4s infinite alternate;
+        }
+        .heart {
+            animation: beat 0.6s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(0deg); opacity: 1; filter: hue-rotate(0deg); }
+            100% { transform: translateX(-50%) scale(1.2) rotate(5deg); opacity: 0.7; filter: hue-rotate(30deg); }
+        }
+        @keyframes beat {
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.2); }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            from { transform: scale(1.1); }
+            to { transform: scale(1.15); }
+        }
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .quote, .flirty-line {
+            font-style: italic;
+            color: #e60050;
+            font-size: 1.4rem;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .quote:hover, .flirty-line:hover {
+            color: #ff1493;
+            text-decoration: underline;
+        }
+        .prompt {
+            font-size: 1rem;
+            color: #333;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            p, .question, .quote, .flirty-line { font-size: 1rem; }
+            .cake, .second-cake, .no-cake, .celebration-img { width: 40vw; }
+            .candle, .heart { width: 8vw; top: -50px; }
+            .buttons { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="birthdayMusic" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_5a76a3d223.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button class="music-toggle" onclick="toggleMusic()">Toggle Music</button>
+    <div class="container" id="firstDisplay">
+        <h1>Happy Birthday, Mamta!</h1>
+        <p>Wishing you a day filled with love, laughter, and all your favorite things! Mamta, your smile makes my heart skip a beat! 🎉</p>
+        <div class="cake-container">
+            <img src="https://images.unsplash.com/photo-1617299540006-66aa8d7d6b32" alt="Birthday Cake" class="cake" onclick="cutCake()">
+            <div class="prompt">Click the cake to cut it!</div>
+            <img src="https://images.unsplash.com/photo-1520453803296-c39eabe2c3d8" alt="Pink Rose" class="celebration-img" id="celebrationImg">
+        </div>
+        <div class="question">Will you let me treat you to a birthday coffee? ☕</div>
+        <div class="buttons">
+            <button onclick="respond('yes')">Yes</button>
+            <button onclick="respond('no')">No</button>
+        </div>
+    </div>
+    <div class="second-display" id="secondDisplay">
+        <h1>You're Amazing, Mamta!</h1>
+        <div class="second-cake-container">
+            <img src="https://images.pexels.com/photos/1704617/pexels-photo-1704617.jpeg" alt="Cake with Candle" class="second-cake">
+            <img src="https://images.pexels.com/photos/274824/pexels-photo-274824.jpeg" alt="Candle" class="candle">
+        </div>
+        <div class="quote">"Mamta, your sparkle outshines every candle, and my heart beats just for you!"</div>
+        <div class="flirty-line">Every moment with you feels like a celebration!</div>
+    </div>
+    <div class="no-display" id="noDisplay">
+        <h1>Still Wishing You the Best, Mamta!</h1>
+        <div class="no-cake-container">
+            <img src="https://images.pixabay.com/photos/6398778/pexels-photo-6398778.jpeg" alt="Chocolate Cake with Roses" class="no-cake">
+            <img src="https://images.unsplash.com/photo-1516559828984-fb3b99548b21" alt="Heart Roses" class="heart">
+        </div>
+        <div class="quote">"Mamta, I'm not giving up that easily—your birthday deserves a big celebration!"</div>
+        <div class="flirty-line">Your charm makes every day feel like a party!</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Music control
+        const audio = document.getElementById('birthdayMusic');
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                document.querySelector('.music-toggle').textContent = 'Pause Music';
+            } else {
+                audio.pause();
+                document.querySelector('.music-toggle').textContent = 'Play Music';
+            }
+        }
+
+        // Attempt autoplay on load
+        window.onload = function() {
+            audio.play().catch(() => {
+                document.querySelector('.music-toggle').textContent = 'Play Music';
+            });
+            launchConfetti();
+        };
+
+        // Confetti animation
+        function launchConfetti() {
+            confetti({
+                particleCount: 200,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Cake-cutting animation
+        function cutCake() {
+            const cake = document.querySelector('.cake');
+            const prompt = document.querySelector('.prompt');
+            const celebrationImg = document.getElementById('celebrationImg');
+            cake.style.opacity = '0';
+            prompt.style.opacity = '0';
+            setTimeout(() => {
+                cake.style.display = 'none';
+                prompt.style.display = 'none';
+                celebrationImg.style.display = 'block';
+                launchConfetti();
+            }, 500);
+        }
+
+        // Yes/No response handling
+        const recipientName = "Mamta";
+        function respond(answer) {
+            if (answer === 'yes') {
+                const firstDisplay = document.getElementById('firstDisplay');
+                const secondDisplay = document.getElementById('secondDisplay');
+                firstDisplay.style.opacity = '0';
+                setTimeout(() => {
+                    firstDisplay.style.display = 'none';
+                    secondDisplay.style.display = 'flex';
+                    secondDisplay.style.opacity = '1';
+                    launchConfetti();
+                }, 500);
+                alert(`Yay, ${recipientName}! You just made my day brighter than a thousand candles! Let's plan that coffee date! 😊`);
+            } else {
+                const firstDisplay = document.getElementById('firstDisplay');
+                const noDisplay = document.getElementById('noDisplay');
+                firstDisplay.style.opacity = '0';
+                setTimeout(() => {
+                    firstDisplay.style.display = 'none';
+                    noDisplay.style.display = 'flex';
+                    noDisplay.style.opacity = '1';
+                    launchConfetti();
+                }, 500);
+                alert(`Aww, ${recipientName}, maybe next time? Wishing you an amazing birthday anyway! 🎂`);
+            }
+        }
+    </script>
+</body>
+</html>
